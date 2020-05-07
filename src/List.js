@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import request from 'superagent';
+import ListItem from './ListItem.js';
 
 export default class List extends Component {
     state = { data:null }
@@ -11,8 +12,9 @@ export default class List extends Component {
         console.log(this.state.data)
         return (
             <div>
-
-                
+                {this.state.data && this.state.data.map(weapon => {
+                    return <ListItem weapon={weapon}/>
+                })}
             </div>
         )
     }
