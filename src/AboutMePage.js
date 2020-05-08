@@ -4,7 +4,12 @@ export default class AboutMePage extends Component {
     render() {
         return (
             <div>
-                stuff about me
+                <h1>Hunter Danielson</h1>
+                <ul>
+                    <li>Software Developer</li>
+                    <li>Monster Hunter Fan</li>
+                    <li>Longsword Player</li>
+                </ul>
             </div>
         )
     }
