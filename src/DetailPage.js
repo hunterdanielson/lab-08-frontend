@@ -7,6 +7,7 @@ export default class DetailPage extends Component {
     state = { data: null }
     async componentDidMount() {
         const data = await request.get(`https://serene-scrubland-75154.herokuapp.com/weapons/${this.props.match.params.id}`);
+        // const data = await request.get(`http://localhost:3001/weapons/${this.props.match.params.id}`);
         this.setState({ data: data.body })
     }
     render() {

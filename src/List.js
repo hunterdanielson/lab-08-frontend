@@ -8,6 +8,7 @@ export default class List extends Component {
     state = { data: null }
     async componentDidMount() {
         const data = await request.get(`https://serene-scrubland-75154.herokuapp.com/weapons`);
+        // const data = await request.get(`http://localhost:3001/weapons`);
         // the following returns a promise and the array I need is inside the [promiseValue]
         // not sure how to access just the promise value right now
         // const newData = getWeapons();
