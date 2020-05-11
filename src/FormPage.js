@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { addWeapon } from './api-calls.js';
-import request from 'superagent';
 
 export default class FormPage extends Component {
     state = {
@@ -14,9 +13,7 @@ export default class FormPage extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
 
-        // const addNewWeapon = await request.post('http://localhost:3001', this.state);
-        const addNewWeapon = await request.post(`https://serene-scrubland-75154.herokuapp.com/weapons/`, this.state)
-        // const newWeapon = await addWeapon(this.state);
+        const addNewWeapon = await addWeapon(this.state);
         this.setState({ sucess: addNewWeapon });
     };
     handleInput = (e) => {

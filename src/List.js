@@ -1,19 +1,13 @@
 import React, { Component } from 'react'
-import request from 'superagent';
 import ListItem from './ListItem.js';
 import loading from './loading.gif';
-// import { getWeapons } from './api-calls.js';
+import { getWeapons } from './api-calls.js';
 
 export default class List extends Component {
     state = { data: null }
     async componentDidMount() {
-        const data = await request.get(`https://serene-scrubland-75154.herokuapp.com/weapons`);
-        // const data = await request.get(`http://localhost:3001/weapons`);
-        // the following returns a promise and the array I need is inside the [promiseValue]
-        // not sure how to access just the promise value right now
-        // const newData = getWeapons();
-        // console.log(newData);
-        this.setState({ data: data.body })
+        const data = await getWeapons();
+        this.setState({ data: data })
     }
     render() {
         console.log(this.state.data)
