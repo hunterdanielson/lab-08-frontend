@@ -28,3 +28,8 @@ export const getElements = async () => {
     const data = await request.get(`${URL}/elements`);
     return data.body;
 }
+
+export const removeElement = async (weaponId) => {
+    const data = await request.delete(`${URL}/weapons/${weaponId}`);
+    return data.body;
+}
