@@ -15,7 +15,7 @@ export default class DetailPage extends Component {
             <div>
                 {
                     this.state.data
-                    ? <ListItem weapon={this.state.data[0]} />
+                    ? <ListItem weapon={this.state.data} />
                     : <img src={loading} alt='loading' />
                 }
             </div>

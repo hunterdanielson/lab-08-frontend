@@ -1,9 +1,9 @@
 import request from 'superagent';
 
 // for using deployed url use this below url
-const URL = 'https://serene-scrubland-75154.herokuapp.com';
+// const URL = 'https://serene-scrubland-75154.herokuapp.com';
 // for local development use below url
-// const URL = 'https://localhost:3001';
+const URL = 'http://localhost:3001';
 
 export const getWeapon = async (weaponId) => {
 
@@ -20,5 +20,11 @@ export const getWeapons = async () => {
 export const addWeapon = async (weapon) => {
 
     const data = await request.post(`${URL}/weapons/`, weapon)
+    return data.body;
+}
+
+export const getElements = async () => {
+
+    const data = await request.get(`${URL}/elements`);
     return data.body;
 }
