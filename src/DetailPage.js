@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import request from 'superagent';
 import ListItem from './ListItem';
 import loading from './loading.gif';
+import { getWeapon } from './api-calls.js';
 
 export default class DetailPage extends Component {
     state = { data: null }
     async componentDidMount() {
-        const data = await request.get(`https://serene-scrubland-75154.herokuapp.com/weapons/${this.props.match.params.id}`);
-        // const data = await request.get(`http://localhost:3001/weapons/${this.props.match.params.id}`);
-        this.setState({ data: data.body })
+        const data = await getWeapon(this.props.match.params.id);
+        this.setState({ data: data })
     }
     render() {
         console.log(this.state.data)
@@ -16,7 +15,7 @@ export default class DetailPage extends Component {
             <div>
                 {
                     this.state.data
-                    ? <ListItem weapon={this.state.data[0]} />
+                    ? <ListItem weapon={this.state.data} />
                     : <img src={loading} alt='loading' />
                 }
             </div>

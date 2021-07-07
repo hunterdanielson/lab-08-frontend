@@ -1,27 +1,40 @@
 import React, { Component } from 'react'
-import request from 'superagent';
 import ListItem from './ListItem.js';
 import loading from './loading.gif';
-// import { getWeapons } from './api-calls.js';
+import { getWeapons, getElements } from './api-calls.js';
 
 export default class List extends Component {
-    state = { data: null }
+    state = { data: null, elements: null, filter: '' }
     async componentDidMount() {
-        const data = await request.get(`https://serene-scrubland-75154.herokuapp.com/weapons`);
-        // const data = await request.get(`http://localhost:3001/weapons`);
-        // the following returns a promise and the array I need is inside the [promiseValue]
-        // not sure how to access just the promise value right now
-        // const newData = getWeapons();
-        // console.log(newData);
-        this.setState({ data: data.body })
+        const data = await getWeapons();
+        const elements = await getElements();
+        this.setState({ data: data, elements: elements })
+    }
+    handleChange = (e) => {
+        this.setState({ filter: e.target.value })
     }
     render() {
-        console.log(this.state.data)
+        console.log('filter', this.state.filter)
         return (
             <div>
+                {this.state.elements && 
+                <select onChange={this.handleChange}>
+                    <option value="">Show all</option>
+                    {
+                        this.state.elements.map(
+                            element => <option value={element.element}>{element.element}</option>
+                            )
+                    }
+                </select>
+                }
                 <h1>Monster Hunter World Weapons</h1>
                 {this.state.data
-                ? this.state.data.map(weapon => {
+                ? this.state.data
+                .filter(weapon => {
+                    if(!this.state.filter) return true;
+                    return weapon.element === this.state.filter
+                })
+                .map(weapon => {
                     return <ListItem weapon={weapon}/>
                 })
                 : <img src={loading} alt="loading"/>
